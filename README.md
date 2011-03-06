@@ -21,7 +21,7 @@ Project file:
     import com.gu.benchmark.Benchmarks
 
     class MyProject(info: ProjectInfo) extends DefaultProject(info) with Benchmarks {
-	...
+        ...
     }
 
 Put your benchmark tests in `src/benchmark/scala`. This is used as `test` sources in
@@ -30,4 +30,30 @@ the following new actions:
  * `benchmark`: Run benchmarks in `src/benchmark`
  * `benchmark-compile`: Compile benchmarks in `src/benchmark`
  * `benchmark-only`: Runs the benchmarks provided as arguments.
+
+
+Sample Benchmarks
+=================
+
+A simple benchmark test might look like the following:
+
+    package com.gu.sample
+
+    import org.scalatest.FunSuite
+    import scala.testing.Benchmark
+
+    case class SampleBenchmark() extends Benchmark {
+      def run = {
+        Thread sleep 5000
+      }
+    }
+
+    class SampleBenchmarkTest extends FunSuite {
+      test("SampleBenchmark") {
+        val timings = SampleBenchmark() run 5
+        println("Total execution time: " + timings.sum)
+        println("Mean execution time: " + (timings.sum/timings.length))
+      }
+    }
+
 
