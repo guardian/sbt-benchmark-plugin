@@ -37,7 +37,7 @@ trait Benchmarks extends BasicWebScalaProject with MavenStyleScalaPaths {
   def benchmarkScalaSourcePath = benchmarkSourcePath / scalaDirectoryName
   def benchmarkSourceRoots = (benchmarkJavaSourcePath##) +++ (benchmarkScalaSourcePath##)
   def benchmarkCompilePath = outputPath / benchmarkCompileDirectoryName
-  def benchmarkClasspath = fullClasspath(Benchmark) +++ testClasspath +++ optionalClasspath
+  def benchmarkClasspath = fullClasspath(Benchmark) +++ benchmarkCompilePath +++ testClasspath +++ optionalClasspath
   def benchmarkAnalysisPath = outputPath / benchmarkAnalysisDirectoryName
   def benchmarkResources = descendents(benchmarkResourcesPath ##, "*")
   def benchmarkResourcesPath = benchmarkSourcePath / resourcesDirectoryName
